@@ -1,5 +1,6 @@
 package com.integrado.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,14 +14,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "discos", schema = "public")
-public class Disco {
+@Table(name = "oficinas", schema = "public")
+public class Oficina implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2543904189132210105L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long iddisco;
-	private Double capacidad;
-	private String codigoactivo;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long idoficina;	
+	private String oficina;
 	private String descripcion;
 	
 	@Column(name="create_at")
@@ -30,31 +34,41 @@ public class Disco {
 	@PrePersist
 	public void prePersist() {
 		this.createAt=new Date();
-	}	
-	
-	public Long getIddisco() {
-		return iddisco;
 	}
-	public void setIddisco(Long iddisco) {
-		this.iddisco = iddisco;
+
+	public Long getIdoficina() {
+		return idoficina;
 	}
-	public Double getCapacidad() {
-		return capacidad;
+
+	public void setIdoficina(Long idoficina) {
+		this.idoficina = idoficina;
 	}
-	public void setCapacidad(Double capacidad) {
-		this.capacidad = capacidad;
+
+	public String getOficina() {
+		return oficina;
 	}
-	public String getCodigoactivo() {
-		return codigoactivo;
+
+	public void setOficina(String oficina) {
+		this.oficina = oficina;
 	}
-	public void setCodigoactivo(String codigoactivo) {
-		this.codigoactivo = codigoactivo;
-	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}	
+	
+	
+	
 	
 }

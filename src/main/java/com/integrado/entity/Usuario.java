@@ -1,6 +1,7 @@
 package com.integrado.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -36,6 +40,16 @@ public class Usuario implements Serializable{
 	private String apellido;
 	@Column(unique = true)
 	private String email;
+	
+	@Column(name="create_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createAt;
+	
+	@PrePersist
+	public void prePersist() {
+		this.createAt=new Date();
+	}	
+	
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	/* customizable para asignar otro nombre a la tabla intermedia */
